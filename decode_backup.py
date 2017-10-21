@@ -48,14 +48,18 @@ with open(sys.argv[1], 'rb') as backup:
 		print '%3d entries, %8d bytes,  ./%s' % (len(index_cont)/4, len(data_cont),file_name)
 		
 		file_name=re.sub('\.{2,}','_',file_name); #would not wanna be writing all over the place
+
 		try:
 			os.makedirs(dir+"/"+os.path.dirname(file_name))
 		except OSError as exc:
 			if exc.errno == 17:
 				pass
+
 		fo = open(dir+"/"+file_name+".idx", "wb")
 		fo.write(index_cont);
 		fo.close()
+
 		fo = open(dir+"/"+file_name+".dat", "wb")
 		fo.write(data_cont);
 		fo.close()
+
