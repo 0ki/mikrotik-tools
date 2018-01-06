@@ -1,3 +1,327 @@
+What's new in 6.41 (2017-Dec-22 11:55):
+
+Important note!!! Backup before upgrade!
+RouterOS (v6.40rc36-rc40 and) v6.41rc1+ contains new bridge implementation that supports hardware offloading (hw-offload).
+This update will convert all interface "master-port" configuration into new bridge configuration, and eliminate "master-port" option as such.
+Bridge will handle all Layer2 forwarding and the use of switch-chip (hw-offload) will be automatically turned on based on appropriate conditions.
+The rest of RouterOS Switch specific configuration remains untouched in usual menus for now.
+Please, note that downgrading to previous RouterOS versions will not restore "master-port" configuration, so use backups to restore configuration on downgrade.
+
+!) bridge - implemented software based vlan-aware bridges;
+https://wiki.mikrotik.com/wiki/Manual:Interface/Bridge#Bridge_VLAN_Filtering
+!) switch - "master-port" conversion into a bridge with hardware offload "hw" option;
+https://wiki.mikrotik.com/wiki/Manual:Switch_Chip_Features#Bridge_Hardware_Offloading
+!) detnet - implemented "/interface detect-internet" feature;
+https://wiki.mikrotik.com/wiki/Manual:Detect_internet
+!) bridge - general implementation of hw-offload bridge (introduced in v6.40rc36);
+!) routerboot - RouterBOOT version numbering system merged with RouterOS;
+!) w60g - added Point to Multipoint support;
+!) w60g - revised "master" and "slave" interface modes to more familiar "bridge", "ap-bridge", "station-bridge";
+!) wireless - new driver with initial support for 160 and 80+80 MHz channel width;
+*) arm - minor improvements on CPU load distribution for RB1100 series devices;
+*) arp - fixed invalid static ARP entries after reboot on interfaces without IP address;
+*) bgp - added 32-bit private ASN support;
+*) bridge - added comment support for VLANs;
+*) bridge - added initial support for hardware "igmp-snooping" on CRS1xx/2xx;
+*) bridge - added support for "/interface list" as a bridge port;
+*) bridge - assume "point-to-point=yes" for all Full Duplex Ethernet interfaces when STP is used (as per standard);
+*) bridge - automatically turn off "fast-forward" feature if both bridge ports have "H" flag;
+*) bridge - changed "Host" and "MDB" table column order;
+*) bridge - disable "hw-offload" when "horizon" or "external-fdb" is set;
+*) bridge - fixed "fast-forward" counters;
+*) bridge - fixed ARP setting (introduced in v6.40rc36);
+*) bridge - fixed connectivity issues when there are multiple VLAN interfaces on bridge;
+*) bridge - fixed hw-offloaded IGMP Snooping service getting stopped;
+*) bridge - fixed multicast forwarding (introduced in v6.40rc36);
+*) bridge - implemented dynamic entries for active MST port overrides;
+*) bridge - implemented software based "igmp-snooping";
+*) bridge - implemented software based MSTP;
+*) bridge - removed "frame-types" and "ingress-filtering" for bridge interfaces (introduced in v6.40rc36);
+*) bridge - set "igmp-snooping=no" by default on new bridges;
+*) bridge - show "admin-mac" only if "auto-mac=no";
+*) bridge - show bridge interface local addresses in the host table;
+*) btest - improved reliability on Bandwidth Test when device`s RAM is almost full;
+*) capsman - added "vlan-mode=no-tag" option;
+*) capsman - added possibility to downgrade CAP with Upgrade command from CAPsMAN;
+*) capsman - return complete CA chain when issuing new certificate;
+*) capsman - use "adaptive-noise-immunity" value from CAP local configuration;
+*) certificate - added option to store CRL in RAM (CLI only);
+*) certificate - fixed SCEP "get" request URL encoding;
+*) certificate - improved CRL update after system startup;
+*) certificate - show "Expired" flag when initial CRL fetch fails;
+*) certificate - show invalid flag when local CRL file does not exist;
+*) chr - added KVM memory balloon support;
+*) chr - added suspend support;
+*) console - do not stop "/certificate sign" process if console times out in 1 minute;
+*) console - removed "/setup";
+*) crs317 - added initial support for HW offloaded MPLS forwarding;
+*) crs317 - fixed reliability on FAN controller;
+*) crs326 - fixed packet processing speed on switch chip if individual port link speed differs;
+*) crs326 - improved transmit performance from SFP+ to Ethernet ports;
+*) crs3xx - added ingress/egress rate input limits;
+*) crs3xx - hide unused switch "vlan-mode", "vlan-header-mode" and "default-vlan-id" options;
+*) crs3xx - switch VLAN configuration integrated within bridge VLAN configuration with hw-offload;
+*) dhcp - fixed DHCP services failing after reboot when DHCP option was used;
+*) dhcp - fixed unresponsive DHCP service caused by inability to read not set RAW options;
+*) dhcp - require DHCP option name to be unique;
+*) dhcp-client - limit and enforce DHCP client "default-route-distance" minimal value to 1;
+*) dhcp-server - added "option-set" argument (CLI only);
+*) dhcp-server - added basic RADIUS accounting;
+*) dhcpv4-client - add dynamic DHCP client for mobile clients which require it;
+*) dhcpv4-client - allow to use DUID for client as identity string as the option 61;
+*) dhcpv4-server - added "NETWORK_GATEWAY" option variable;
+*) dhcpv4-server - strip trailing "\0" in "hostname" if present;
+*) discovery - use "/interface list" instead of interface name under neighbor discovery settings;
+*) e-mail - do not show errors when sending e-mail from script;
+*) eoip - made L2MTU parameter read-only;
+*) ethernet - removed "master-port" parameter;
+*) export - fixed interface list export;
+*) fetch - accept all HTTP 2xx status codes;
+*) filesystem - implemented additional system integrity checks on reboots;
+*) firewall - added "tls-host" firewall matcher;
+*) health - fixed bogus voltage readings on CCR1009;
+*) hotspot - fixed "dst-port" to require valid "protocol" in "walled-garden ip";
+*) hotspot - fixed Walled Garden IP functionality when address-list is used;
+*) ike1 - DPD retry interval set to 5 seconds;
+*) ike1 - disallow peer creation using base mode;
+*) ike1 - fixed crash on xauth if user does not exist;
+*) ike1 - fixed memory corruption when IPv6 is used;
+*) ike1 - improved stability on phase1 rekeying;
+*) ike1 - release mismatched PH2 peer IDs;
+*) ike1 - use /32 netmask if none provided by mode config;
+*) ike2 - added support for multiple split networks;
+*) ike2 - check identities on "initial-contact";
+*) ike2 - do not allow to configure nat-traversal;
+*) ike2 - fixed PH1 lifetime reset on boot;
+*) ike2 - fixed initiator DDoS cookie processing;
+*) ike2 - fixed responder DDoS cookie first notify type check;
+*) ike2 - kill connection when peer changes address;
+*) ike2 - use peer configuration address when available on empty TSi;
+*) interface - added "/interface reset-counters" command (CLI only);
+*) interface - added default "/interface list" "dynamic" which contains dynamic interfaces;
+*) interface - added option to join and exclude "/interface list" from one and another;
+*) interface - fixed corrupted "/interface list" configuration after upgrade;
+*) ippool6 - try to assign desired prefix for client if prefix is not being already used;
+*) ipsec - added DH groups 19, 20 and 21 support for phase1 and phase2;
+*) ipsec - allow to specify "remote-peer" address as DNS name;
+*) ipsec - fixed incorrect esp proposal key size usage;
+*) ipsec - fixed policy enable/disable;
+*) ipsec - improved hardware accelerated IPSec performance on 750Gr3;
+*) ipsec - improved reliability on certificate usage;
+*) ipsec - renamed "firewall" argument to "notrack-chain" in peer configuration;
+*) ipsec - skip invalid policies for phase2;
+*) ipv6 - add dynamic "/ip dns" server address from RA when RA is permitted by configuration;
+*) l2tp - improved reliability on packet processing in FastPath;
+*) l2tp-server - fixed PPP services becoming unresponsive after changes on L2TP server with IPSec configuration;
+*) lcd - fixed "flip-screen=yes" state after reboot;
+*) log - added "bridge" topic;
+*) log - fixed interface name in log messages;
+*) log - optimized "poe-out" logging topic logs;
+*) lte - added "/interface lte apn" menu (Passthrough requires reconfiguration);
+*) lte - added Passthrough support;
+*) lte - added Yota non-configurable modem support;
+*) lte - added support for ZTE ME3630 E1C with additional "/port" for GPS usage;
+*) lte - automatically add "/ip dhcp-client" configuration on interface;
+*) lte - changed default values to "add-default-route=yes", "use-peer-dns=yes" and "default-route-distance=2";
+*) lte - fixed Passthrough support;
+*) lte - fixed authentication for non LTE modes;
+*) lte - fixed error when trying to add APN profile without name;
+*) lte - fixed rare crash when initializing LTE modem after reset;
+*) lte - fixed user authentication for R11e-LTE when new firmware is used;
+*) lte - integrated IP address acquisition without DHCP client for wAP LTE kit-US;
+*) lte - limited minimal default route distance to 1;
+*) lte - update info command with "location area code" and "physical cell id" values;
+*) m11g - improved ethernet performance on high load;
+*) mac-server - use "/interface list" instead of interface name under MAC server settings;
+*) modem - added initial support for Alcatel IK40 and Olicard 500;
+*) neighbor - show neighbors on actual bridge port instead of bridge itself
+*) netinstall - fixed missing "/flash/etc" on first bootup;
+*) netinstall - fixed missing default configuration prompt on first startup after reset/netinstall;
+*) ospf - fixed OSPF v2 and v3 neighbor election;
+*) ovpn-server - do not periodically change automatically generated server MAC address;
+*) poe - added new "poe-out" status "controller-error";
+*) poe - fixed false positive excessive logs in auto-on mode when connected to 100 Mbps device powered from another power source;
+*) poe - log PoE status related messages under debug topic;
+*) ppp - added initial support for PLE902;
+*) ppp - added support for Sierra MC7750, Verizon USB730L;
+*) ppp - do not disconnect PPP connection after "idle-timeout" even if traffic is being processed;
+*) ppp - fixed "change-mss" functionality when MSS option is missing on forwrded packets;
+*) ppp - fixed L2TP and PPTP encryption negotiation process on configuration changes;
+*) ppp - fixed situation when part of PPP configuration was reset to default values after reboot;
+*) pppoe-client - properly re-establish MLPPP session when one of the lines stopped transmitting packets;
+*) pppoe-server - fixed situation when PPPoE servers become invalid on reboot;
+*) quickset - added support for "/interface list" in firewall, neighbor discovery, MAC-Telnet and MAC-Winbox;
+*) quickset - fixed LTE quickset mode APN field;
+*) quickset - fixed situation when Quickset automatically changes mode to CPE;
+*) quickset - renamed router IP static DNS name to "router.lan";
+*) radius - limited RADIUS timeout maximum value to 3 seconds;
+*) route - fixed potential route crash on routing table update;
+*) scheduler - properly display long scheduler configuration;
+*) sfp - fixed SFP interface power monitor when bad SFP DDMI information is received;
+*) sftp - added functionality which imports ".auto.rsc" file or reboots router on ".auto.npk" upload;
+*) sms - fixed minor problem for SMS delivery;
+*) sms - log decoded USSD responses;
+*) snmp - fixed "ifHighSpeed" value of VLAN, VRRP and Bonding interfaces;
+*) snmp - fixed bridge host requests on devices with multiple bridge interfaces;
+*) snmp - fixed bulk requests when non-repeaters are used;
+*) snmp - fixed consecutive OID bulk get from the same table;
+*) snmp - show only available OIDs under "/system health print oid";
+*) ssh - do not use DH group1 with strong-crypto enabled;
+*) ssh - enforced 2048bit DH group on tile and x86 architectures;
+*) system - show USB topology for the device info;
+*) tile - improved hardware encryption processes;
+*) tr069-client - fixed "/interface lte apn" configuration parameters;
+*) traceroute - improved "/tool traceroute" results processing;
+*) upnp - add "src-address" parameter on NAT rule if it is specified on UPnP request;
+*) upnp - deny UPnP request if port is already used by the router;
+*) ups - fixed duplicate "failed" UPS logs;
+*) userman - allow to generate more than 999 users;
+*) w60g - added "put-slaves-in-bridge" and "isolate-slaves" options to manage connected clients;
+*) w60g - connected stations are treated as separate interfaces;
+*) webfig - added favicon file;
+*) webfig - fixed router getting reset to default configuration;
+*) webfig - fixed terminal graphic user interface under Safari browser;
+*) winbox - added "W60G station" tab in Wireless menu;
+*) winbox - added "notrack-chain" setting to IPSec peers;
+*) winbox - added support for "_" symbol in terminal window;
+*) winbox - added switch menu on RB1100AHx4;
+*) winbox - do not show MetaROUTER stuff on RB1100AHx4;
+*) winbox - do not show duplicate "Switch" menus for CRS326;
+*) winbox - do not show duplicate "Template" parameters for filter in IPSec policy list;
+*) winbox - do not show duplicate filter parameters "Published" in ARP list;
+*) winbox - do not show unnecessary tabs from "Switch" menu;
+*) winbox - fixed "/certificate sign" process;
+*) winbox - fixed bridge port sorting order by interface name;
+*) winbox - show warnings under "/system routerboard settings" menu;
+*) wireless - added "allow-signal-out-off-range" option for Access List entries;
+*) wireless - added "indonesia3" regulatory domain information;
+*) wireless - added passive scan option for wireless scan mode;
+*) wireless - added support for CHARGEABLE_USER_ID in EAP Accounting;
+*) wireless - check APs against connect-list rules starting with strongest signal;
+*) wireless - do not show background scan frequencies in the monitor command channel field;
+*) wireless - improved reliability on "rx-rate" selection process;
+*) wireless - increased the EAP message retransmit count;
+*) wireless - log "signal-strength" when successfully connected to AP;
+*) wireless - pass interface MAC address in Sniffer TZSP frames;
+*) wireless - updated "UK 5.8 Fixed" and "Australia" country data;
+*) wireless - updated "united kingdom" regulatory domain information;
+
+What's new in 6.40.5 (2017-Oct-31 13:05):
+
+*) certificate - fixed import of certificates with empty SKID;
+*) crs3xx - fixed 100% CPU usage after interface related changes;
+*) firewall - do not NAT address to 0.0.0.0 after reboot if to-address is used but not specified;
+*) ike1 - fixed crash after downgrade if DH groups 19,20,21 were used for phase1;
+*) ike1 - fixed RSA authentication for Windows clients behind NAT;
+*) ipsec - fixed lost value for "remote-certificate" parameter after disable/enable;
+*) ipv6 - fixed IPv6 addresses constructed from prefix and static address entry;
+*) log - properly recognize MikroTik specific RADIUS attributes;
+*) lte - do not reset modem when it is not possible to access SMS storage;
+*) lte - fixed modem initialization after reboot;
+*) lte - fixed PIN option after setting up the band;
+*) sms - include time stamps in SMS delivery reports;
+*) sms - properly initialize SMS storage;
+*) snmp - fixed "/system license" parameters for CHR;
+*) winbox - allow shorten bytes to k,M,G in Hotspot user limits;
+*) wireless - fixed rate selection process when "rate-set=configured" and NV2 protocol is used;
+
+What's new in 6.40.4 (2017-Oct-02 08:38):
+
+*) address - show warning on IPv6 address when acquire from pool has failed;
+*) arp - properly update dynamic ARP entries after interface related changes;
+*) crs1xx/2xx - fixed 1 Gbps forced mode for several SFP modules;
+*) crs317 - added L2MTU support;
+*) crs3xx - improved packet processing in slowpath;
+*) defconf - fixed RouterOS default configuration (introduced in v6.40.3);
+*) dhcp - fixed downgrade from RouterOS v6.41 or higher;
+*) dhcpv6 client - added IAID check in reply;
+*) dhcpv6-client - fixed IA check on solicit when "rapid-commit" is enabled;
+*) dhcpv6-client - ignore unknown IA;
+*) dhcpv6-client - require pool name to be unique;
+*) e-mail - auto complete file name on "file" parameter (introduced in v6.40);
+*) export - fixed wireless "ssid" and "supplicant-identity" compact export;
+*) hotspot - fixed missing "/ip hotspot server profile" if invalid "dns-name" was specified;
+*) hotspot - improved user statistics collection process;
+*) ike1 - remove PH1 and PH2 when "mode-config" exchange fails;
+*) ipsec - kill PH1 on "mode-config" address failure;
+*) ipv6 - fixed IPv6 address request from pool;
+*) lte - fixed modem initialization after reboot;
+*) ntp-client - properly start NTP client after reboot if manual server IP is not configured;
+*) rb931-2nd - fixed startup problems (requires additional reboot after upgrade);
+*) routerboard - fixed "/system routerboard upgrade" for CRS212-8G-4S;
+*) sfp - fixed OPTON module DDM information readings;
+*) sfp - fixed temperature readings for various SFP modules;
+*) snmp - fixed "/caps-man registration-table" uptime values;
+*) snmp - fixed "/system license" parameters for CHR;
+*) tile - improved reliability on MPLS package processing;
+*) userman - fixed unresponsive RADIUS server (introduced in v6.40.3);
+*) vlan - do not allow VLAN MTU to be higher than L2MTU;
+*) webfig - improved reliability of login process;
+*) wireless - added "etsi1" regulatory domain information;
+*) wireless - improved WPA2 key exchange reliability;
+*) wireless - updated "norway" regulatory domain information;
+
+What's new in 6.40.3 (2017-Sep-01 07:40):
+
+*) dhcpv6-server - do not release address of static binding from pool after server removal;
+*) export - fixed "/system routerboard" export (introduced in 6.40.1);
+*) export - fixed export for PoE-OUT related settings;
+*) ike1 - fixed initiator ID comparison to NAT-OA;
+*) led - fixed "on" and "off" triggers when multiple LEDs are selected;
+*) led - fixed RB711UA ether1 LED (introduced in v6.38rc16);
+*) lte - do not show USB LTE modem under "/port" menu;
+*) lte - fixed ethernet flap when LTE establishes connection;
+*) lte - fixed SXT LTE graphs in QuickSet;
+*) lte - improved reliability of USB LTE modems;
+*) poe-out - fixed router reboot after "poe-out-status" changes;
+*) rb1100ahx4 - fixed HW acceleration fragmented packet decryption when fragment is smaller than 64 bytes;
+*) rb750gr3 - show warning and do not allow to use "protected-bootloader" feature if "factory-firmware" older than 3.34.4 version;
+*) routerboard - added "mode-button" support for RB750Gr3 (CLI only);
+*) ssh - do not execute command if it starts with "-" symbol;
+*) traffic-flow - fixed reboots when IPv6 address has been set as target address without active IPv6 package;
+*) userman - fixed "limitation" and "profile-limitation" update;
+*) userman - fixed CoA packet processing after changes in "/tool user-manager router" configuration;
+*) webfig - allow to open table entry even if table is not sorted by # (introduced in v6.40);
+*) webfig - allow to unset "rate-limit" for DHCP leases;
+*) winbox - added possibility to define "comment" for "/routing bgp network" entries;
+*) winbox - do not show FAN related information under "/system health" menu for devices which does not have it;
+*) winbox - do not show LCD menu for devices which does not have it;
+*) winbox - fixed ARP table update after entry changes state to incomplete;
+*) wireless - added "russia3" country settings;
+*) wireless - added New Zealand regulatory domain information for P2P links;
+*) wireless - updated China and New Zealand regulatory domain information;
+*) www - fixed unresponsive Web services (introduced in v6.40);
+
+What's new in 6.40.2 (2017-Aug-08 13:13):
+
+*) dhcpv6-client - fixed IA evaluation order;
+*) led - fixed "modem-signal" LEDs (introduced in 6.40);
+*) pppoe-client - fixed wrong MRU detection over VLAN interfaces;
+*) rb2011 - fixed possible LCD blinking along with ethernet LED (introduced in 6.40);
+*) sfp - fixed invalid temperature readings when ambient temperature is below 0C;
+*) winbox - added certificate settings;
+*) winbox - added support for certificate CRL list;
+*) winbox - do not show LCD menu for devices which does not have it;
+*) winbox - hide "level" and "tunnel" parameters for IPSec policy templates;
+*) winbox - hide FAN speed if it is 0RPM;
+
+What's new in 6.40.1 (2017-Aug-03 12:37):
+
+*) bonding - improved reliability on bonding interface removal;
+*) chr - fixed false warnings on upgrade reboots;
+*) dhcpv6-client - do not run DHCPv6 client when IPv6 package is disabled;
+*) export - fixed export for different parameters where numerical range or constant string is expected;
+*) firewall - properly remove "address-list" entry after timeout ends;
+*) interface - improved interface state change handling when multiple interfaces are affected at the same time;
+*) lte - fixed LTE not passing any traffic while in running state;
+*) ovpn-client - fixed incorrect netmask usage for pushed routes (introduced in 6.40);
+*) pppoe-client - fixed incorrectly formed PADT packet;
+*) rb2011 - fixed possible LCD blinking along with ethernet LED (introduced in 6.40);
+*) rb922 - restored missing wireless interface on some boards;
+*) torch - fixed Torch on PPP tunnels (introduced in 6.40);
+*) trafficgen - fixed "lost-ratio" showing incorrect statistics after multiple sequences;
+*) winbox - added "none-dynamic" and "none-static" options for "address-list-timeout" parameter under NAT, Mangle and RAW rules;
+
 What's new in v6.40 (2017-Jul-21 08:45):
 
 !) lte - added initial fastpath support (except SXT LTE and Sierra modems);
