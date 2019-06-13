@@ -1,3 +1,464 @@
+What's new in 6.44.3 (2019-Apr-23 12:37):
+
+*) certificate - fixed SAN being duplicated on status change (introduced in v6.44);
+*) conntrack - fixed "loose-tcp-tracking" parameter not taken in action (introduced in v6.44);
+*) dhcpv4-server - fixed commenting option for alerts;
+*) dhcpv6-server - fixed binding setting update from RADIUS;
+*) ike1 - improved stability for transport mode policies on initiator side;
+*) ipsec - fixed freshly created identity not taken in action (introduced in v6.44);
+*) ipsec - fixed possible configuration corruption after import (introduced in v6.44);
+*) ipv6 - adjusted IPv6 route cache max size;
+*) ipv6 - improved IPv6 neighbor table updating process;
+*) lte - reset LTE modem only when SIM slot is changed on dual SIM slot devices;
+*) rb2011 - removed "sfp-led" from "System/LEDs" menu;
+*) smb - fixed possible buffer overflow;
+*) snmp - added "radio-name" (mtxrWlRtabRadioName) OID support;
+*) ssh - added "both", "local" and "remote" options for "forwarding-enabled" parameter;
+*) ssh - do not generate host key on configuration export;
+*) ssh - fixed multiline non-interactive command execution;
+*) switch - fixed possible crash when interface state changes and DHCP Snooping is enabled;
+*) userman - updated authorize.net gateway DNS name;
+*) wireless - added support for US FCC UNII-2 and Canada country profiles for LHG-5HPnD-US, RBLHG-5HPnD-XL-US and SXTsq5HPnD-US devices;
+*) wireless - improved wireless country settings for EU countries;
+
+What's new in 6.44.2 (2019-Apr-01 12:47):
+
+MAJOR CHANGES IN v6.44.2:
+----------------------
+!) ipv6 - fixed soft lockup when forwarding IPv6 packets;
+!) ipv6 - fixed soft lockup when processing large IPv6 Neighbor table;
+----------------------
+
+Changes in this release:
+
+*) ipv6 - adjust IPv6 route cache max size based on total RAM memory;
+
+What's new in 6.44.1 (2019-Mar-13 08:38):
+
+Changes in this release:
+
+*) bridge - fixed possible memory leak when using "ingress-filtering=yes" on bridge interface;
+*) certificate - force 3DES encryption for P12 certificate export;
+*) dhcp - fixed dual stack queue addition;
+*) dhcpv6-server - use MAC address for RADIUS user when "allow-dual-stack-queue=yes";
+*) e-mail - fixed missing "from" address for sent e-mails (introduced in v6.44);
+*) gps - increase precision for dd format;
+*) gps - removed unnecessary leading "0" for dd format;
+*) ipsec - allow identities with empty XAuth login and password if RADIUS is enabled (introduced in v6.44);
+*) ipsec - fixed dynamic L2TP peer and identity configuration missing after reboot (introduced in v6.44);
+*) ipsec - use "remote-id=ignore" for dynamic L2TP configuration (introduced in v6.44);
+*) ipv6 - do not allow setting "preferred-lifetime" longer than "valid-lifetime";
+*) lte - do not show "session-uptime" if session is not up;
+*) lte - fixed LTE interface band setting on RBSXTLTE3-7 (introduced in v6.44);
+*) rb4011 - fixed ether10 failing to auto negotiate link speed to 1Gbps;
+*) winbox - added "use-local-address" parameter in "IP/Cloud" menu;
+*) wireless - fixed antenna gain setting on RBSXT5nDr2;
+
+What's new in 6.44 (2019-Feb-25 14:11):
+
+MAJOR CHANGES IN v6.44:
+----------------------
+!) cloud - added command "/system backup cloud" for backup storing on cloud (CLI only);
+!) ipsec - added new "identity" menu with common peer distinguishers;
+!) ipsec - removed "main-l2tp" exchange-mode, it is the same as "main" exchange-mode;
+!) ipsec - removed "users" menu, XAuth user configuration is now handled by "identity" menu;
+!) radius - initial implementation of RadSec (RADIUS communication over TLS);
+!) speedtest - added "/tool speed-test" for ping latency, jitter, loss and TCP and UDP download, upload speed measurements (CLI only);
+----------------------
+
+Changes in this release:
+
+*) bgp - properly update keepalive time after peer restart;
+*) bridge - added option to monitor fast-forward status;
+*) bridge - count routed FastPath packets between bridge ports under FastPath bridge statistics;
+*) bridge - disable fast-forward when using SlowPath features;
+*) bridge - fixed BOOTP packet forwarding when DHCP Snooping is enabled;
+*) bridge - fixed DHCP Option 82 parsing when using DHCP Snooping;
+*) bridge - fixed log message when hardware offloading is being enabled;
+*) bridge - fixed packet forwarding when changing MSTI VLAN mappings;
+*) bridge - fixed packet forwarding with enabled DHCP Snooping and Option 82;
+*) bridge - fixed possible memory leak when using MSTP;
+*) bridge - fixed system's identity change when DHCP Snooping is enabled (introduced in v6.43);
+*) bridge - improved packet handling when hardware offloading is being disabled;
+*) bridge - improved packet processing when bridge port changes states;
+*) btest - added multithreading support for both UDP and TCP tests;
+*) btest - added warning message when CPU load exceeds 90% (CLI only);
+*) capsman - always accept connections from loopback address;
+*) certificate - added support for multiple "Subject Alt. Names";
+*) certificate - enabled RC2 cipher to allow P12 certificate decryption;
+*) certificate - fixed certificate signing by SCEP client if multiple CA certificates are provided;
+*) certificate - show digest algorithm used in signature;
+*) chr - assign interface names based on underlying PCI device order on KVM;
+*) chr - distribute NIC queue IRQ's evenly across all CPUs;
+*) chr - fixed IRQ balancing when using more than 32 CPUs;
+*) chr - improved system stability when insufficient resources are allocated to the guest;
+*) cloud - added "ddns-update-interval" parameter;
+*) cloud - do not reuse old UDP socket if routing changes are detected;
+*) cloud - ignore "force-update" command if DDNS is disabled;
+*) cloud - improved DDNS service disabling;
+*) cloud - made address updating faster when new public address detected;
+*) conntrack - added new "loose-tcp-tracking" parameter (equivalent to "nf_conntrack_tcp_loose" in netfilter);
+*) console - renamed IP protocol 41 to "ipv6-encap";
+*) console - updated copyright notice;
+*) crs317 - fixed packet forwarding when LACP is used with hw=no;
+*) crs3xx - fixed packet forwarding through SFP+ ports when using 100Mbps link speed;
+*) crs3xx - improved fan control stability;
+*) defconf - fixed configuration not generating properly on upgrade;
+*) defconf - fixed default configuration loading on RB4011iGS+5HacQ2HnD-IN;
+*) defconf - fixed IPv6 link-local address range in firewall rules;
+*) dhcp - added "allow-dual-stack-queue" setting for IPv4/IPv6 DHCP servers to control dynamic lease/binding behaviour;
+*) dhcp - properly load DHCP configuration if options are configured;
+*) dhcpv4-server - added "parent-queue" parameter (CLI only);
+*) dhcpv4-server - added "User-Name" attribute to RADIUS accounting messages;
+*) dhcpv4-server - fixed service becoming unresponsive after interface leaves and enters the same bridge;
+*) dhcpv4-server - use ARP for conflict detection;
+*) dhcpv6-client - use default route distance also for unreachable route added by DHCPv6 client;
+*) dhcpv6-server - allow to add DHCPv6 server with pool that does not exist;
+*) dhcpv6-server - fixed missing gateway for binding's network if RADIUS authentication was used;
+*) dhcpv6-server - improved DHCPv6 server stability when using "print" command;
+*) dhcpv6-server - show "client-address" parameter for bindings;
+*) discovery - detect proper slave interface on bounded interfaces;
+*) discovery - fixed malformed neighbor information for routers that has incomplete IPv6 configuration;
+*) discovery - send master port in "interface-name" parameter;
+*) discovery - show neighbors on actual bridge port instead of bridge itself for LLDP;
+*) e-mail - added info log message when e-mail is sent successfully;
+*) e-mail - added support for multiple transactions on single connection;
+*) ethernet - added "tx-rx-1024-max" counter to Ethernet stats;
+*) ethernet - fixed IPv4 and IPv6 packet forwarding on IPQ4018 devices;
+*) ethernet - fixed linking issues on wAP ac, RB750Gr2 and Metal 52 ac (introduced in v6.43rc52);
+*) ethernet - fixed packet forwarding when SFP interface is disabled on hEX S;
+*) ethernet - fixed VLAN1 forwarding on RB1100AHx4 and RB4011 devices;
+*) ethernet - improved per core ethernet traffic classificator on mmips devices;
+*) export - fixed "silent-boot" compact export;
+*) fetch - added "http-header-field" parameter;
+*) fetch - added option to specify multiple headers under "http-header-field", including content type;
+*) fetch - fixed "without-paging" option;
+*) fetch - improved file downloading to slow memory;
+*) fetch - improved stability when using HTTP mode;
+*) fetch - removed "http-content-type" parameter;
+*) gps - increase precision for dd format;
+*) gps - moved "coordinate-format" from "monitor" command to "set" parameter;
+*) health - improved fan control stability on CRS328-24P-4S+RM;
+*) hotspot - added "https-redirect" under server profiles;
+*) hotspot - added per-user NAT rule generation based on "incoming-filter" and "outgoing-filter" parameters;
+*) ike1 - do not allow using RSA-key and RSA-signature authentication methods simultaneously on single peer;
+*) ike1 - fixed memory leak;
+*) ike2 - added option to specify certificate chain;
+*) ike2 - added peer identity validation for RSA auth (disabled after upgrade);
+*) ike2 - allow to match responder peer by "my-id=fqdn" field;
+*) ike2 - fixed local address lookup when initiating new connection;
+*) ike2 - improved subsequent phase 2 initialization when no childs exist;
+*) ike2 - properly handle certificates with empty "Subject";
+*) ike2 - retry RSA signature validation with deduced digest from certificate;
+*) ike2 - send split networks over DHCP (option 249) to Windows initiators if DHCP Inform is received;
+*) ike2 - show weak pre-shared-key warning;
+*) interface - added "pwr-line" interface support (more information will follow in next newsletter);
+*) ipsec - added account log message when user is successfully authenticated;
+*) ipsec - added basic pre-shared-key strength checks;
+*) ipsec - added new "remote-id" peer matcher;
+*) ipsec - allow to specify single address instead of IP pool under "mode-config";
+*) ipsec - fixed active connection killing when changing peer configuration;
+*) ipsec - fixed all policies not getting installed after startup (introduced in v6.43.8);
+*) ipsec - fixed stability issues after changing peer configuration (introduced in v6.43);
+*) ipsec - hide empty prefixes on "peer" menu;
+*) ipsec - improved invalid policy handling when a valid policy is uninstalled;
+*) ipsec - made dynamic "src-nat" rule more specific;
+*) ipsec - made peers autosort themselves based on reachability status;
+*) ipsec - moved "profile" menu outside "peer" menu;
+*) ipsec - properly detect AES-NI extension as hardware AEAD;
+*) ipsec - removed limitation that allowed only single "auth-method" with the same "exchange-mode" as responder;
+*) ipsec - require write policy for key generation;
+*) kidcontrol - added IPv6 support;
+*) kidcontrol - added "reset-counters" command for "device" menu (CLI only);
+*) kidcontrol - added statistics web interface for kids (http://router.lan/kid-control);
+*) kidcontrol - added "tur-fri", "tur-mon", "tur-sat", "tur-sun", "tur-thu", "tur-tue", "tur-wed" parameters;
+*) kidcontrol - dynamically discover devices from DNS activity;
+*) kidcontrol - fixed validation checks for time intervals;
+*) kidcontrol - properly detect time zone changes;
+*) kidcontrol - use "/128" prefix-length for IPv6 addresses;
+*) l2tp - fixed IPsec secret not being updated when "ipsec-secret" is changed under L2TP client configuration;
+*) lcd - made "pin" parameter sensitive;
+*) led - fixed default LED configuration for RBSXTsq-60ad;
+*) led - fixed default LED configuration for wAP 60G AP devices;
+*) led - fixed PWR-LINE AP Ethernet LED polarity ("/system routerboard upgrade" required);
+*) lldp - fixed missing capabilities fields on some devices;
+*) log - accumulate multiple e-mail messages before sending;
+*) lte - added additional ID support for Novatel USB730L modem;
+*) lte - added "cell-monitor" command for R11e-LTE international modem (CLI only);
+*) lte - added "ecno" field for "info" command;
+*) lte - added "firmware-upgrade" command for R11e-LTE international modems (CLI only);
+*) lte - added initial support for multiple APN for R11e-4G (new modem firmware required);
+*) lte - added initial support for Telit LN940;
+*) lte - added multiple APN support for R11e-4G;
+*) lte - added option to lock the LTE operator;
+*) lte - added support for JioFi JMR1040 modem;
+*) lte - fixed connection issue when LTE modem was de-registered from network for more than 1 minute;
+*) lte - fixed DHCP IP acquire (introduced in v6.43.7);
+*) lte - fixed DHCP relay packet forwarding when in passthrough mode;
+*) lte - fixed IPv6 activation for R11e-LTE-US modems;
+*) lte - fixed Jaton/SQN modems preventing router from booting properly;
+*) lte - fixed LTE interface not working properly after reboot on RBSXTLTE3-7;
+*) lte - fixed missing running (R) flag for Jaton LTE modems;
+*) lte - fixed passthrough DHCP address forward when other address is acquired from operator;
+*) lte - fixed reported "rsrq" precision (introduced in v6.43.8);
+*) lte - improved compatibility for Alt38xx modems;
+*) lte - improved SIM7600 initialization after reset;
+*) lte - improved SimCom 7100e support;
+*) lte - query "cfun" on initialization;
+*) lte - require write policy for at-chat;
+*) lte - update firmware version information after R11e-LTE/R11e-4G firmware upgrade;
+*) netinstall - do not show kernel failure critical messages in the log after fresh install;
+*) ntp-client - fixed "dst-active" and "gmt-offset" being updated after synchronization with server;
+*) port - improved "remote-serial" TCP performance in RAW mode;
+*) ppp - added "at-chat" command;
+*) ppp - fixed dynamic route creation towards VPN server when "add-default-route" is used;
+*) profiler - classify kernel crypto processing as "encrypting";
+*) profile - removed obsolete "file-name" parameter;
+*) proxy - removed port list size limit;
+*) radius - implemented Proxy-State attribute handling in CoA and disconnect requests;
+*) rb3011 - implemented multiple engine IPsec hardware acceleration support;
+*) rb4011 - fixed SFP+ interface full duplex and speed parameter behavior;
+*) rb4011 - improved SFP+ interface linking to 1Gbps;
+*) rbm33g - improved stability when used with some USB devices;
+*) romon - improved reliability when processing RoMON packets on CHR;
+*) routerboard - removed "RB" prefix from PWR-LINE AP devices;
+*) routerboard - require at least 10 second interval between "reformat-hold-button" and "max-reformat-hold-button";
+*) smb - added commenting option for SMB users (CLI only);
+*) smb - fixed macOS clients not showing share contents;
+*) smb - fixed Windows 10 clients not able to establish connection to share;
+*) sniffer - save packet capture in "802.11" type when sniffing on w60g interface in "sniff" mode;
+*) snmp - added "dot1qPortVlanTable" and "dot1dBasePortTable" OIDs;
+*) snmp - changed fan speed value type to Gauge32;
+*) snmp - fixed "rsrq" reported precision;
+*) snmp - fixed w60g station table;
+*) snmp - removed "rx-sector" ("Wl60gRxSector") value;
+*) snmp - report bridge ifSpeed as "0";
+*) snmp - report ifSpeed 0 for sub-layer interfaces;
+*) ssh - added "allow-none-crypto" parameter to disable "none" encryption usage (CLI only);
+*) ssh - added error log message when key exchange fails;
+*) ssh - close active SSH connections before IPsec connections on shutdown;
+*) ssh - fixed public key format compatibility with RFC4716;
+*) supout - fixed "poe-out" output not showing all interfaces;
+*) supout - fixed Profile output on single core devices;
+*) switch - added comment field to switch ACL rules;
+*) switch - fixed ACL rules on IPQ4018 devices;
+*) system - accept only valid path for "log-file" parameter in "port" menu;
+*) system - removed obsolete "/driver" command;
+*) tr069-client - added "check-certificate" parameter to allow communication without certificates;
+*) tr069-client - added "connection-request-port" parameter (CLI only);
+*) tr069-client - added support for InformParameter object;
+*) tr069-client - fixed certificate verification for certificates with IP address;
+*) tr069-client - fixed HTTP cookie getting duplicated with the same key;
+*) tr069-client - increased reported "rsrq" precision;
+*) traceroute - improved stability when sending large ping amounts;
+*) traffic-flow - reduced minimal value of "active-flow-timeout" parameter to 1s;
+*) tunnel - properly clear dynamic IPsec configuration when removing/disabling EoIP with DNS as "remote-address";
+*) upgrade - made security package depend on DHCP package;
+*) usb - improved power-reset error message when no bus specified on CCR1072-8G-1S+;
+*) usb - improved USB device powering on startup for hAP ac^2 devices;
+*) usb - increased default power-reset timeout to 5 seconds;
+*) userman - added first and last name fields for signup form;
+*) userman - show redirect location in error messages;
+*) user - require "write" permissions for LTE firmware update;
+*) vrrp - made "password" parameter sensitive;
+*) w60g - added "10s-average-rssi" parameter to align mode (CLI only);
+*) w60g - added align mode "/interface w60g align" (CLI only);
+*) w60g - fixed scan in bridge mode;
+*) w60g - improved PtMP performance;
+*) w60g - improved reconnection detection;
+*) w60g - improved "tx-packet-error-rate" reading;
+*) w60g - renamed disconnection message when license level did not allow more connected clients;
+*) w60g - renamed "frequency-list" to "scan-list";
+*) watchdog - allow specifying DNS name for "send-smtp-server" parameter;
+*) webfig - improved file handling;
+*) winbox - added 4th chain selection for "HT TX chains" and "HT RX chains" under "CAPsMAN/CAP Interface/Wireless" tab;
+*) winbox - added "allow-dual-stack-queue" parameter in "IP/DHCP Server" and "IPv6/DHCP Server" menus;
+*) winbox - added "challenge-password" field when signing certificate with SCEP;
+*) winbox - added "conflict-detection" parameter in "IP/DHCP Server" menu;
+*) winbox - added "coordinate-format" parameter in LTE interface settings;
+*) winbox - added "radio-name" setting to "CAPsMAN/CAP Interface/General" tab;
+*) winbox - added "secondary-channel" setting to "CAPsMAN/CAP Interface/Channel" tab;
+*) winbox - added src/dst address and in/out interface list columns to default firewall menu view;
+*) winbox - added support for dynamic devices in "IP/Kid Control/Devices" tab;
+*) winbox - allow setting "network-mode" to "auto" under LTE interface settings;
+*) winbox - allow specifying interface lists in "CAPsMAN/Access List" menu;
+*) winbox - fixed "IPv6/Firewall" "Connection limit" parameter not allowing complete IPv6 prefix lengths;
+*) winbox - fixed L2MTU parameter setting on "W60G" type interfaces;
+*) winbox - fixed "LCD" menu not shown on RB2011UiAS-2HnD;
+*) winbox - fixed missing w60g interface status values;
+*) winbox - improved file handling;
+*) winbox - moved "Too Long" statistics counter to Ethernet "Rx Stats" tab;
+*) winbox - organized wireless parameters between simple and advanced modes;
+*) winbox - renamed "Default AP Tx Rate" to "Default AP Tx Limit";
+*) winbox - renamed "Default Client Tx Rate" to "Default Client Tx Limit";
+*) winbox - show "R" flag under "IPv6/DHCP Server/Bindings" tab;
+*) winbox - show "System/RouterBOARD/Mode Button" on devices that have such feature;
+*) winbox - show "W60G" wireless tab on wAP 60G AP;
+*) wireless - added new "installation" parameter to specify router's location;
+*) wireless - improved AR5212 response to incoming ACK frames;
+*) wireless - improved connection stability for new model Apple devices;
+*) wireless - improved NV2 performance for all ARM devices;
+*) wireless - improved signal strength at low TX power on LHG 5 ac, LHG 5 ac XL and LDF 5 ac ("/system routerboard upgrade" required);
+*) wireless - improved system stability for all ARM devices with wireless;
+*) wireless - improved system stability for all devices with 802.11ac wireless;
+*) wireless - improved system stability when scanning for other networks;
+*) wireless - removed G/N support for 2484MHz in "japan" regulatory domain;
+*) wireless - report last seen IP address in RADIUS accounting messages;
+*) wireless - show "installation" parameter when printing configuration;
+
+What's new in 6.43.12 (2019-Feb-08 11:46):
+
+MAJOR CHANGES IN v6.43.12:
+----------------------
+!) winbox - improvements in connection handling to router with open winbox service (CVE-2019–3924);
+----------------------
+
+What's new in 6.43.11 (2019-Feb-04 12:24):
+
+*) ipsec - accept only valid path for "export-pub-key" parameter in "key" menu;
+*) quickset - fixed "country" parameter not properly setting regulatory domain configuration;
+*) smb - fixed possible buffer overflow;
+*) w60g - fixed disconnection issues in PtMP setups;
+*) wireless - improved antenna gain setting for devices with built in antennas;
+*) wireless - show indoor/outdoor frequency limitations under "/interface wireless info country-info" command;
+
+What's new in 6.43.10 (2019-Jan-24 07:09):
+
+(factory only release)
+
+What's new in 6.43.9 (2019-Jan-10 07:11):
+
+(factory only release)
+
+What's new in 6.43.8 (2018-Dec-21 07:10):
+
+MAJOR CHANGES IN v6.43.8:
+----------------------
+!) telnet - do not allow to set "tracefile" parameter;
+----------------------
+
+Changes in this release:
+
+*) bridge - fixed IPv6 link-local address generation when auto-mac=yes;
+*) capsman - fixed "group-key-update" parameter not using correct units;
+*) crs3xx - improved data transmission between 10G and 1G ports;
+*) console - properly remove system note after configuration reset;
+*) dhcpv4-server - fixed dynamic lease reuse after expiration;
+*) dhcpv6-server - properly handle DHCP requests that include prefix hint;
+*) ethernet - fixed VLAN1 forwarding on RB1100AHx4 and RB4011 devices;
+*) gps - added "coordinate-format" parameter;
+*) led - fixed default LED configuration for RBMetalG-52SHPacn;
+*) led - fixed PWR-LINE AP ethernet led polarity ("/system routerboard upgrade" required);
+*) lte - disallow setting LTE interface as passthrough target;
+*) lte - fixed DHCP IP acquire (introduced in v6.43.7);
+*) lte - fixed passthrough functionality when interface is removed;
+*) lte - increased reported "rsrq" precision;
+*) lte - reset USB when non-default slot is used;
+*) package - use bundled package by default if standalone packages are installed as well;
+*) resource - fixed "total-memory" reporting on ARM devices;
+*) snmp - added "tx-ccq" ("mtxrWlStatTxCCQ") and "rx-ccq" ("mtxrWlStatRxCCQ") values;
+*) switch - fixed MAC learning when disabling interfaces on devices with Atheros8327 and QCA8337 switch chips;
+*) system - fixed situation when all configuration was not properly loaded on bootup;
+*) timezone - fixed "Europe/Dublin" time zone;
+*) upgrade - automatically uninstall standalone package if already installed in bundle;
+*) webfig - do not show bogus VHT field in wireless interface advanced mode;
+*) winbox - added "allow-roaming" parameter in "Interface/LTE" menu;
+*) winbox - allow to change VHT rates when 5ghz-n/ac band is used;
+*) winbox - renamed "Radius" to "RADIUS";
+*) winbox - show "Switch" menu on RB4011iGS+5HacQ2HnD and RB4011iGS+;
+*) wireless - added new "installation" parameter to specify router's location;
+*) wireless - improved stability for 802.11ac;
+*) wireless - improvements in wireless frequency selection;
+
+What's new in 6.43.7 (2018-Nov-30 09:01):
+
+MAJOR CHANGES IN v6.43.7:
+----------------------
+!) upgrade - release channels renamed - "bugfix" to "long-term", "current" to "stable" and "release candidate" to "testing";
+!) upgrade - "testing" release channel now can contain "beta" together with "release-candidate" versions;
+----------------------
+
+Changes in this release:
+
+*) bridge - properly disable dynamic CAP interfaces;
+*) certificate - fixed "expires-after" parameter calculation;
+*) certificate - fixed time zone adjustment for SCEP requests;
+*) certificate - properly flush old CRLs when changing store location;
+*) chr - fixed possible memory allocation failure when using multiple CPUs or interfaces on Xen installations;
+*) crs328 - fixed SFP ports not reporting auto-negotiation status;
+*) crs328 - improved link status update on disabled SFP and SFP+ interfaces;
+*) defconf - automatically accept default configuration if reset done by holding button;
+*) defconf - fixed default configuration loading on RB4011iGS+5HacQ2HnD-IN;
+*) discovery - fixed malformed neighbor information for routers that has incomplete IPv6 configuration;
+*) discovery - fixed neighbor discovery for PPP interfaces;
+*) discovery - properly use System ID for "software-id" value on CHR;
+*) export - fixed "silent-boot" compact export;
+*) health - fixed bad voltage readings on RB493G;
+*) interface - improved system stability when including/excluding a list to itself;
+*) ipsec - fixed hw-aead (H) flag presence under Installed SAs on startup;
+*) ipsec - improved stability when uninstalling multiple SAs at once;
+*) ipsec - properly handle peer profiles on downgrade;
+*) ipsec - properly update warnings under peer menu;
+*) kidcontrol - do not allow users with "read" policy to pause and resume kids;
+*) log - properly handle long echo messages;
+*) lte - added support for more ZTE MF90 modems;
+*) ospf - improved stability while handling type-5 LSAs;
+*) routerboard - renamed SIM slots to "a" and "b" on SXT LTE kit;
+*) routerboard - show "boot-os" and "force-backup-booter" options only on devices that have such feature;
+*) snmp - do not initialise interface traps on bootup if they are not enabled;
+*) timezone - updated timezone information from tzdata2018g release;
+*) traffic-flow - fixed post NAT port reporting;
+*) traffic-flow - fixed "src-mac-address" and added "post-src-mac-address" fields;
+*) tunnel - made "ipsec-secret" parameter sensitive;
+*) usb - fixed power-reset for hAP ac^2 devices;
+*) user - speed up first time login process after upgrade from version older than v6.43;
+*) winbox - allow to specify SIM slot on LtAP mini;
+*) winbox - enabled "fast-forward" by default when adding new bridge;
+*) winbox - fixed neighbor discovery for IPv6 neighbors;
+*) winbox - show "System/Health" only on boards that have health monitoring;
+
+What's new in 6.43.6 (2018-Nov-07 10:40):
+
+(factory only release)
+
+What's new in 6.43.5 (2018-Oct-25 12:37):
+
+(factory only release)
+
+What's new in 6.43.4 (2018-Oct-17 06:37):
+
+Changes in this release:
+
+*) bridge - do not learn untagged frames when filtering only tagged packets;
+*) bridge - fixed possible memory leak when VLAN filtering is used;
+*) bridge - improved packet handling when hardware offloading is being disabled;
+*) bridge - properly forward unicast DHCP messages when using DHCP Snooping with hardware offloading;
+*) crs328 - improved link status update on disabled SFP+ interface when using DAC;
+*) crs3xx - fixed possible memory leak when disabling bridge interface;
+*) crs3xx - properly read "eeprom" data after different module inserted in disabled interface;
+*) dhcpv4-server - use client MAC address for dual stack queue when "client-id" is not received;
+*) dhcpv6-server - fixed dynamic binding addition on solicit when IA_PD does not contain prefix (introduced in v6.43);
+*) dhcpv6-server - recreate DHCPv6 server binding if it is no longer within prefix pool when rebinding/renewing;
+*) ipsec - allow multiple peers to the same address with different local-address (introduced in v6.43);
+*) led - added "dark-mode" functionality for LHG and LDF series devices;
+*) led - added "dark-mode" functionality for wsAP ac lite, RB951Ui-2nD, hAP and hAP ac lite devices;
+*) led - fixed default LED configuration for SXT LTE kit devices;
+*) led - fixed power LED turning on after reboot when "dark-mode" is used;
+*) ntp - fixed possible NTP server stuck in "started" state;
+*) romon - improved packet processing when MTU in path is lower than 1500;
+*) routerboard - show "boot-os" option only on devices that have such feature;
+*) traffic-flow - fixed post NAT port reporting;
+*) w60g - added "frequency-list" setting;
+*) w60g - added interface stats;
+*) w60g - fixed interface LED status update on connection;
+*) w60g - general stability and performance improvements;
+*) w60g - improved stability for short distance links;
+*) w60g - renamed "mcs" to "tx-mcs" and "phy-rate" to "tx-phy-rate";
+
+What's new in 6.43.3 (2018-Oct-05 13:12):
+
+(factory only release)
+
 What's new in 6.43.2 (2018-Sep-18 12:12):
 
 Changes in this release:
