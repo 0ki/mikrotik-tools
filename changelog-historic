@@ -1,3 +1,558 @@
+What's new in 6.46.3 (2020-Jan-28 10:46):
+
+*) hotspot - fixed redirect to log in page (introduced in v6.45);
+*) lora - added "ru-864-mid" channel plan;
+*) lora - improved immediate packet delivery;
+*) lte - added GPS port support for Quectel EP06 modem;
+*) lte - added "psc" (Primary Scrambling Code) parameter for "cell-monitor" function on R11e-LTE6 and R11e-LTE;
+*) lte - do not show invalid "phy-cellid" when it is not yet received on "R11e-LTE";
+*) lte - do not show unrelated info parameters after network mode failover;
+*) port - fixed multiple identical USB serial device detection (introduced in v6.46);
+*) ppp - fixed connection establishment when receiving "0.0.0.0" DNS;
+*) snmp - fixed "ifOperStatus" reporting for combo ports;
+*) winbox - removed duplicate "counter", "chain", "size" and "payload" parameters under "LoRa/Traffic";
+
+What's new in 6.46.2 (2020-Jan-14 07:17):
+
+*) chr - improved stability when changing ARP modes on e1000 type adapters;
+*) console - prevent "flash" directory from being removed (introduced in v6.46);
+*) console - updated copyright notice;
+*) crs305 - disable optical SFP/SFP+ module Tx power after disabling SFP+ interface;
+*) defconf - fixed "caps-mode" not initialized properly after resetting;
+*) defconf - fixed default configuration loading on RBwAPG-60adkit (introduced in v6.46);
+*) lora - fixed packet sending when using "antenna-gain" higher than 5dB;
+*) lte - fixed "cell-monitor" on R11e-LTE in 3G mode;
+*) lte - fixed "earfcn" reporting on R11e-LTE6 in UMTS and GSM modes;
+*) lte - report only valid info parameters on R11e-LTE6;
+*) ppp - fixed minor typo in "ppp-client" monitor;
+*) qsfp - do not report bogus monitoring readouts on modules without DDMI support;
+*) qsfp - improved module monitoring readouts for DAC and break-out cables;
+*) routerboard - added "mode-button" support for RBcAP2nD;
+*) security - fixed vulnerability for routers with default password (limited to Wireless Wire), admin could login on startup with empty password before default configuration script was fully loaded;
+*) system - fixed "*.auto.rsc" file execution (introduced in v6.46);
+*) system - fixed "check-installation" on PowerPC devices (introduced in v6.46);
+*) traffic-generator - improved memory handling on CHR;
+*) webfig - allow skin designing without "ftp" and "sensitive" policies;
+*) webfig - fixed "skins" saving to "flash" directory if it exists (introduced in v6.46);
+*) winbox - automatically refresh "Packets" table when new packets are captured by "Tools/Packet Sniffer";
+*) winbox - fixed "Default Route Distance" default value when creating new LTE APN;
+*) winbox - removed duplicate "join-eui" and "dev-eui" parameters under "Lora/Traffic";
+
+What's new in 6.46.1 (2019-Dec-13 12:44):
+
+*) capsman - fixed CAP upgrading (introduced in v6.46);
+*) console - fixed "clear-history" restoring historic actions after power cycle;
+*) console - removed "edit" and "set" actions from "System/History" menu;
+*) defconf - fixed default configuration loading after fresh install (introduced in v6.46);
+*) dhcpv6-server - use lease time from RADIUS;
+*) dude - fixed image and font file accessing (introduced in v6.46);
+*) gps - only adjust system time after GPS signal is established;
+*) health - fixed health reporting on OmniTIK 5 PoE ac;
+*) ipsec - improved system stability when processing decrypted packet on unregistered interface;
+*) l2tp - improved system stability when disconnecting many clients at once;
+*) log - fixed "disk-file-name" parameter validation (introduced in v6.46);
+*) lora - added support for MIPSBE, PPC, TILE and x86 architectures;
+*) lora - improved confirmed downlink forwarding;
+*) lte - do not reset modem when setting the same SIM slot on LtAP;
+*) lte - show SIM error when no card is present;
+*) ppp - fixed session establishment with high amount of tunnels (introduced in v6.46);
+*) ppp - prioritize "remote-ipv6-prefix-pool" from PPP secret over PPP profile;
+*) qsfp - do not show "sfp-wavelength" for cables that do not support it;
+*) snmp - fixed health related OID polling (introduced in v6.46);
+*) supout - fixed autosupout.rif file generation (introduced in v6.46);
+*) system - fixed "*.auto.rsc" file execution (introduced in v6.46);
+*) user-manager - fixed "db-path" parameter validation (introduced in v6.46);
+*) webfig - fixed skin folder presence (introduced in v6.46);
+*) winbox - fixed "allowed-number" parameter setting invalid value in "Tool/SMS" menu;
+*) winbox - show "LCD" menu only on boards that have LCD screen;
+*) wireless - added "russia4" regulatory domain information;
+*) wireless - improved compatibility by adding default installation mode and gain for devices with integrated antennas;
+*) wireless - improved compatibility for Switzerland wireless country profile to improve compliance with ETSI regulations;
+
+What's new in 6.46 (2019-Dec-02 11:16):
+
+MAJOR CHANGES IN v6.46:
+----------------------
+!) lora - added support for LoRaWAN low-power wide-area network technology for MIPSBE, MMIPS and ARM;
+!) package - accept only packages with original filenames (CVE-2019-3976);
+!) package - improved package signature verification (CVE-2019-3977);
+!) security - fixed improper handling of DNS responses (CVE-2019-3978, CVE-2019-3979);
+----------------------
+
+Changes in this release:
+
+*) backup - fixed automatic backup file generation when configuration reset by button;
+*) backup - store automatically created backup file in "flash" directory;
+*) bonding - correctly remove HW offloaded bonding with ARP monitoring;
+*) bonding - properly handle MAC addresses when bonding WLAN interfaces;
+*) bridge - disable/enable bridge port when setting bpdu-guard;
+*) bridge - do not add bridge as untagged VLAN member when frame-types=admit-only-vlan-tagged;
+*) bridge - do not add dynamically VLAN entry when changing "pvid" property for non-vlan aware bridge;
+*) bridge - include whole VLAN-id in DHCP Option 82 message;
+*) btest - removed duplicate "duration" parameter;
+*) capsman - fixed background scan showing incorrect regulatory domain mismatch error (CAP upgrade required);
+*) capsman - fixed channel auto reselection;
+*) capsman - fixed MAC address detection for "common-name" parameter in certificate requests;
+*) capsman - improved DFS channel switching when radar detected;
+*) capsman - improved radar detection algorithm;
+*) ccr - improved general system stability;
+*) certificate - added progress bar when creating certificate request;
+*) certificate - added support for certificate request signing with EC keys;
+*) certificate - allow specifying "file-name" parameter for export (CLI only);
+*) certificate - allow specifying "name" parameter for import (CLI only);
+*) certificate - improved CRL updating process;
+*) certificate - removed "key-size" parameter for "create-certificate-request" command;
+*) chr - added support for Azure guest agent;
+*) console - added bitwise operator support for "ip6" data type;
+*) console - fixed "address" column width when printing DHCPv4 leases;
+*) console - fixed IP conversion to "num" data type;
+*) console - fixed "tobool" conversion;
+*) console - properly detect IPv6 address as "ip6" data type;
+*) crs1xx/2xx - allow to set trunk port as mirroring target;
+*) crs3xx - correctly handle L2MTU change;
+*) crs3xx - do not send pause frames when ethernet "tx-flow-control" is disabled on CRS326/CRS328/CRS305 devices;
+*) crs3xx - improved interface initialization;
+*) crs3xx - improved switch-chip resource allocation on CRS317-1G-16S+, CRS309-1G-8S+, CRS312-4C+8XG, CRS326-24S+2Q+ devices;
+*) crs3xx - improved system stability on CRS309-1G-8S+, CRS312-4C+8XG, CRS326-24S+2Q+ devices;
+*) crs3xx - remove previously set mirror-source property before changing it;
+*) defconf - fixed default configuration loading on RBmAPL-2nD (introduced in v6.45);
+*) defconf - require "policy" permission to print default configuration;
+*) dhcpv4-client - allow empty "dhcp-options" parameter when adding new client;
+*) dhcpv4-client - fixed "dhcp-options" parameter setting when adding new client;
+*) dhcpv4-server - improved stability when RADIUS Interim update is sent;
+*) dhcpv6-client - fixed timeout when doing rebind;
+*) dhcpv6-client - properly update bind time when unused prefix received from the server;
+*) dhcpv6-client - properly update IPv6 address on rebind;
+*) dhcpv6-server - fixed logged error message when using "address-pool=static-only";
+*) dhcpv6-server - ignore prefix-hint from client's DHCPDISCOVER if static prefix received from RADIUS;
+*) dhcpv6-server - include "User-Name" parameter in accounting requests;
+*) dhcpv6-server - made "calling-station-id" contain MAC address if DUID contains it;
+*) dot1x - added "reject-vlan-id" server parameter (CLI only);
+*) dot1x - added support for dynamic switch rules from RADIUS;
+*) dot1x - added support for "mac-auth" authentication type (CLI only);
+*) ethernet - automatically detect interface when using IP address for power-cycle-ping;
+*) ethernet - do not enable interface after reboot that is already disabled;
+*) ethernet - send requests only from ethernet interface when using MAC address for power-cycle-ping;
+*) export - always export "ssid" value for w60g interfaces;
+*) fetch - do not allocate extra 500KiB on SMIPS;
+*) fetch - improved stability when processing large output data;
+*) gps - use "serial1" as default port on RBLtAP-2HnD;
+*) hotspot - fixed non-local NAT redirection to port TCP/64873;
+*) hotspot - fixed RADIUS CoA "address-list" update;
+*) ike1 - fixed minor spelling mistake in logs;
+*) ike2 - improved CHILD SA rekey process with Apple iOS 13;
+*) ike2 - improved stability when retransmitting first packet as responder;
+*) ipsec - added "error" topic for identity check failure logging messages;
+*) ipsec - fixed DNS resolving when domain has only AAAA entries;
+*) ipsec - fixed policy "sa-src-address" detection from "local-address" (introduced in v6.45);
+*) ipv6 - changed "advertise-dns" default value to "yes";
+*) led - fixed default LED configuration for RBLHG-2nD and RBLHG-5HPnD;
+*) log - increased log message length limit to 1024 characters;
+*) lte - added support for D402 modem;
+*) lte - added support for LM960A18;
+*) lte - added support for Telit LM960 and LE910C1 modems;
+*) lte - do not allow setting 3G and GSM modes on LTE only modems;
+*) lte - fixed band setting on R11e-4G;
+*) lte - fixed network registration on R11e-LTE-US;
+*) lte - fixed Sierra WP7601 driver loading;
+*) lte - fix "operator" names not being displayed properly;
+*) lte - improved modem initialization;
+*) lte - show "primary-band" only for LTE modems;
+*) lte - use /128 prefix for IPv6 address on LTE interface;
+*) lte - use interface from RA when "ipv6-interface=none" and IPv6 enabled;
+*) ppp - added 3GPP IoT "access-technology" definitions;
+*) ppp - added support for Sierra WP7601;
+*) ppp - disable DTR send when using at-chat;
+*) quickset - added "LTE AP Dual" mode support;
+*) quickset - added "LTE APN" dropdown support;
+*) quickset - fixed "LTE Band" checkbox display;
+*) route - fixed area range summary route installation in VRF;
+*) routerboard - fixed default CPU frequency on RB750r2 ("/system routerboard upgrade" required);
+*) routerboard - fixed USB configuration export on RBLtAP-2HnD;
+*) routerboard - hide "memory-frequency" parameter for RBLtAP-2HnD;
+*) sniffer - allow filtering by packet size;
+*) snmp - added "disabled" and "comment" parameters for communities;
+*) snmp - added option to monitor "link-downs" parameter using MIKROTIK-MIB;
+*) snmp - fixed "dot1dBasePort" index offset for BRIDGE-MIB;
+*) snmp - fixed "ifLastChange" OID reporting for IF-MIB;
+*) snmp - fixed "radio-name" (mtxrWlRtabRadioName) OID support;
+*) snmp - improved interface status reporting for IfOperStatus OID;
+*) snmp - improved LLDP interface returned index and type;
+*) snmp - return only interfaces with MAC addresses for LLDP;
+*) snmp - use "src-address" also for traps;
+*) ssh - fixed output printing when "command" parameter used;
+*) supout - include information from all LTE interfaces;
+*) supout - removed "file" option from "/system sup-output" command;
+*) switch - added "comment" property for switch vlan menu (CLI only);
+*) switch - correctly update dynamic switch rule when dhcp-snooping is enabled;
+*) switch - ignore "default-vlan-id" property after switch reset on RTL8367 switch chip;
+*) switch - show "external" flag for bridge hosts on MT7621, RTL8367 switch chips;
+*) timezone - updated time zone database to version 2019c;
+*) tr069-client - added CellDiagnostics parameter support;
+*) tr069-client - added LTE band and cellular technology selection parameters;
+*) tr069-client - added LTE RSCP, ECNO and ICCID parameter support;
+*) tr069-client - added multiple LTE monitoring parameters;
+*) tr069-client - reconnect to ACS when "ConnectionRequestURL" is updated;
+*) upgrade - improved auto package updating using "check-for-updates";
+*) ups - improved compatibility with APC UPS's;
+*) usb - general USB modem stability improvements;
+*) userman - updated Authorize.Net to use SHA512 hashing;
+*) w60g - added "region" setting to limit allowed frequencies (CLI only);
+*) w60g - do not reset link when changing comment on station;
+*) w60g - fixed "monitor" command on disabled interfaces;
+*) w60g - move stations to new bridge when "put-in-bridge" parameter is changed;
+*) webfig - fixed link to Winbox download;
+*) winbox - added "ip-address" and stats columns in "IP/Kid-Control/Devices" menu;
+*) winbox - added "public-address-ipv6" parameter to "IP/Cloud" menu;
+*) winbox - added "reset-counters" button to "IP/Kid Control/Devices" menu;
+*) winbox - added "tx-info-field" parameter to "Wireless/W60G" menu;
+*) winbox - added "Vendor Classes" tab in "IP/DHCP Server" menu;
+*) winbox - added wireless alignment LED types to "System/LEDs" menu;
+*) winbox - fixed allowed range for bridge filter "new-priority" parameter;
+*) winbox - fixed "CAPs Scanner" stopping;
+*) winbox - fixed "cluster-id" parameter setting in "Routing/BGP/Instances" menu;
+*) winbox - fixed file locking when uploading multiple files at once;
+*) winbox - fixed firewall limit parameter support for rates more than 4G;
+*) winbox - fixed invalid flag presence in "IP/SMB/Shares" menu;
+*) winbox - fixed "Routing" menu icon presence when there is no routing package installed;
+*) winbox - improved stability when transfering multiple files between multiple windows;
+*) winbox - properly show timestamp in file "Creation Time" field;
+*) winbox - removed "Set CA Passphrase" button from "Certificate" menu;
+*) winbox - renamed "Queue Limit" to "Queue Size" for "pcq-upload-default" and "pcq-download-default" parameters;
+*) winbox - replaced "kb" with "KiB" in "Tools/Packet Sniffer" menu;
+*) winbox - show "Switch" menu on RBwAPGR-5HacD2HnD;
+*) winbox - show "System/RouterBOARD/Mode Button" on devices that have such feature;
+*) wireless - added 4 chain MCS support for 802.11n wireless protocol (CLI only);
+*) wireless - added "ETSI" regulatory domain information;
+*) wireless - added "indonesia4" regulatory domain information;
+*) wireless - added "push-button-5s" value for "wps-mode" parameter;
+*) wireless - added U-NII-2 support forRBSXTsqG-5acD, RBLHGG-5acD-XL, RBLHGG-5acD, RBLDFG-5acD, RBDiscG-5acD;
+*) wireless - allow using "canada2" regulatory domain on US lock devices;
+*) wireless - fixed 802.11n rate selection when managed by CAPsMAN;
+*) wireless - fixed RX chain selection;
+*) wireless - fixed sensor MAC address reporting in TZSP header;
+*) wireless - improved 802.11ac stability for all ARM devices with wireless;
+*) wireless - improved IPQ4019, QCA9984, QCA9888 wireless interface stability;
+*) wireless - updated "ukraine" regulatory domain information;
+*) wireless - updated "united-states" regulatory domain information;
+
+What's new in 6.45.7 (2019-Oct-24 08:44):
+
+MAJOR CHANGES IN v6.45.7:
+----------------------
+!) lora - added support for LoRaWAN low-power wide-area network technology for MIPSBE, MMIPS and ARM;
+!) package - accept only packages with original filenames (CVE-2019-3976);
+!) package - improved package signature verification (CVE-2019-3977);
+!) security - fixed improper handling of DNS responses (CVE-2019-3978, CVE-2019-3979);
+----------------------
+
+Changes in this release:
+
+*) capsman - fixed frequency setting requiring multiple frequencies;
+*) capsman - fixed newline character missing on some logging messages;
+*) conntrack - properly start manually enabled connection tracking;
+*) crs312 - fixed combo SFP port toggling (introduced in v6.44.5);
+*) crs3xx - correctly display link rate when 10/100/1000BASE-T SFP modules are used in SFP+ interfaces;
+*) crs3xx - fixed management access when using switch rule "new-vlan-priority" property;
+*) export - fixed "bootp-support" parameter export;
+*) ike2 - fixed phase 1 rekeying (introduced in v6.45);
+*) led - fixed default LED configuration for RBLHG5nD;
+*) lte - fixed modem not receiving IP configuration when roaming (introduced in v6.45);
+*) radius - fixed open socket leak when invalid packet is received (introduced in v6.44);
+*) sfp - fixed "sfp-rx-power" value for some transceivers;
+*) snmp - improved reliability on SNMP service packet validation;
+*) system - improved system stability for devices with AR9342 SoC;
+*) winbox - show SFP tab for QSFP interfaces;
+*) wireless - added "canada2" regulatory domain information;
+*) wireless - improved stability when setting fixed primary and secondary channels on RB4011iGS+5HacQ2HnD-IN;
+
+What's new in 6.45.6 (2019-Sep-10 09:06):
+
+Important note!!!
+Due to removal of compatibility with old version passwords in this version, downgrading to any version prior to v6.43 (v6.42.12 and older) will clear all user passwords and allow password-less authentication. Please secure your router after downgrading.
+Old API authentication method will also no longer work, see documentation for new login procedure:
+https://wiki.mikrotik.com/wiki/Manual:API#Initial_login
+
+*) capsman - fixed regulatory domain information checking when doing background scan;
+*) conntrack - improved system stability when using h323 helper (introduced in v6.45);
+*) crs3xx - fixed "egress-rate" property on CRS309-1G-8S+, CRS312-4C+8XG, CRS326-24S+2Q+ devices;
+*) qsfp - clear SFP monitoring data on port enable;
+*) qsfp - correctly display SFP monitoring data;
+*) qsfp - fixed EEPROM checksum validation;
+*) qsfp - show more QSFP module diagnostics;
+*) wireless - include last frequency when manually setting frequency step in "scan-list";
+
+What's new in 6.45.5 (2019-Aug-26 10:56):
+
+Important note!!!
+Due to removal of compatibility with old version passwords in this version, downgrading to any version prior to v6.43 (v6.42.12 and older) will clear all user passwords and allow password-less authentication. Please secure your router after downgrading.
+Old API authentication method will also no longer work, see documentation for new login procedure:
+https://wiki.mikrotik.com/wiki/Manual:API#Initial_login
+
+*) crs328 - adjust fan speed based on SFP and CPU temperature;
+*) dhcpv4-server - fixed "Acct-Output-Octets" reporting to RADIUS;
+*) health - improved fan control on CRS3xx and CCR1016-12S-1S+r2;
+*) ike2 - don't release policy on rekey when child not found;
+*) ike2 - fixed ID validation with multiple SAN;
+*) ike2 - fixed policy port selection for responder with natted initiator;
+*) ike2 - fixed traffic selector address family selection when using IPv6;
+*) ike2 - improved rekeying process with Windows initiators;
+*) ike2 - properly start all initiators to the same remote address;
+*) ipsec - allow inline "passphrase" parameter when importing keys;
+*) ipsec - fixed "eap-radius" authentication method (introduced in v6.45);
+*) ipsec - fixed minor spelling mistakes in logs;
+*) lte - fixed cell information monitoring on R11e-LTE-US (introduced in v6.45.2);
+*) lte - fixed LTE interface disappearing on RBSXTLTE3-7;
+*) smb - improved stability on x86 and CHR (CVE-2019-16160);
+*) snmp - fixed encrypted data sequence (introduced in v6.44.5);
+*) ssh - fixed carriage return presence in subsequent sessions;
+*) switch - fix port isolation for non-CRS series switch chips;
+*) system - accept only valid string for "name" parameter in "disk" menu (CVE-2019-15055);
+*) upnp - fixed XML parsing (FG-VD-19-110);
+*) watchdog - renamed "no-ping-delay" parameter to "ping-start-after-boot";
+*) winbox - added "auto-erase" parameter to "Tools/SMS" menu;
+*) winbox - added "https-redirect" parameter to "IP/Hotspot/Profiles menu";
+*) winbox - added "revision" parameter to "System/Routerboard" menu;
+*) winbox - removed "max-sms" parameter from "Tools/SMS" menu;
+*) wireless - fixed basic rate reporting in snooper;
+
+What's new in 6.45.4 (2019-Aug-13 09:04):
+
+(factory only release)
+
+What's new in 6.45.3 (2019-Jul-29 12:11):
+
+Important note!!!
+Due to removal of compatibility with old version passwords in this version, downgrading to any version prior to v6.43 (v6.42.12 and older) will clear all user passwords and allow password-less authentication. Please secure your router after downgrading.
+Old API authentication method will also no longer work, see documentation for new login procedure:
+https://wiki.mikrotik.com/wiki/Manual:API#Initial_login
+
+*) certificate - renew certificates via SCEP when 3/4 of lifetime reached;
+*) crs317 - fixed multicast packet receiving (introduced in v6.45);
+*) hotspot - fixed default profile values not being used (introduced in v6.45);
+*) rb4011 - fixed SFP+ interface linking (introduced in v6.45.2);
+*) smips - reduced RouterOS main package size (disabled LTE modem, dot1x and SwOS support);
+*) supout - fixed SIM slot printing (introduced in v6.45);
+*) wireless - improved U-APSD (WMM Power Save) support for 802.11e;
+
+What's new in 6.45.2 (2019-Jul-17 10:04):
+
+Important note!!!
+Due to removal of compatibility with old version passwords in this version, downgrading to any version prior to v6.43 (v6.42.12 and older) will clear all user passwords and allow password-less authentication. Please secure your router after downgrading.
+Old API authentication method will also no longer work, see documentation for new login procedure:
+https://wiki.mikrotik.com/wiki/Manual:API#Initial_login
+
+*) bonding - fixed bonding running status after reboot when using other bonds as slave interfaces (introduced in v6.45);
+*) cloud - properly stop "time-zone-autodetect" after disable;
+*) interface - fixed missing PWR-LINE section on PL7411-2nD and PL6411-2nD (introduced v6.44);
+*) ipsec - added "connection-mark" parameter for mode-config initiator;
+*) ipsec - allow peer argument only for "encrypt" policies (introduced in v6.45);
+*) ipsec - fixed peer configuration migration from versions older than v6.43 (introduced in v6.45);
+*) ipsec - improved stability for peer initialization (introduced in v6.45);
+*) ipsec - show warning for policies with "unknown" peer;
+*) ospf - fixed possible busy loop condition when accessing OSPF LSAs;
+*) profile - added "internet-detect" process classificator;
+*) radius - fixed "User-Password" encoding (introduced in v6.45);
+*) ssh - do not enable "none-crypto" if "strong-crypto" is enabled on upgrade (introduced in v6.45);
+*) ssh - fixed executed command output printing (introduced in v6.45);
+*) supout - fixed supout file generation outside of internal storage with insufficient space;
+*) upgrade - fixed "auto-upgrade" to use new style authentication (introduced in v6.45);
+*) vlan - fixed "slave" flag for non-running interfaces (introduced in v6.45);
+*) wireless - improved 802.11ac stability for all ARM devices with wireless;
+*) wireless - improved range selection when distance set to "dynamic";
+
+What's new in 6.45.1 (2019-Jun-27 10:23):
+
+Important note!!!
+Due to removal of compatibility with old version passwords in this version, downgrading to any version prior to v6.43 (v6.42.12 and older) will clear all user passwords and allow password-less authentication. Please secure your router after downgrading.
+Old API authentication method will also no longer work, see documentation for new login procedure:
+https://wiki.mikrotik.com/wiki/Manual:API#Initial_login
+
+MAJOR CHANGES IN v6.45.1:
+----------------------
+!) dot1x - added support for IEEE 802.1X Port-Based Network Access Control;
+!) ike2 - added support for EAP authentication methods (eap-tls, eap-ttls, eap-peap, eap-mschapv2) as initiator;
+!) security - fixed vulnerabilities CVE-2019-13954, CVE-2019-13955;
+!) security - fixed vulnerabilities CVE-2019-11477, CVE-2019-11478, CVE-2019-11479;
+!) security - fixed vulnerability CVE-2019-13074;
+!) user - removed insecure password storage;
+----------------------
+
+Changes in this release:
+
+*) bridge - correctly display bridge FastPath status when vlan-filtering or dhcp-snooping is used;
+*) bridge - correctly handle bridge host table;
+*) bridge - fixed log message when hardware offloading is being enabled;
+*) bridge - improved stability when receiving traffic over USB modem with bridge firewall enabled;
+*) capsman - fixed CAP system upgrading process for MMIPS;
+*) capsman - fixed interface-list usage in access list;
+*) ccr - improved packet processing after overloading interface;
+*) certificate - added "key-type" field;
+*) certificate - added support for ECDSA certificates (prime256v1, secp384r1, secp521r1);
+*) certificate - fixed self signed CA certificate handling by SCEP client;
+*) certificate - made RAM the default CRL storage location;
+*) certificate - removed DSA (D) flag;
+*) certificate - removed "set-ca-passphrase" parameter;
+*) chr - legacy adapters require "disable-running-check=yes" to be set;
+*) cloud - added "replace" parameter for backup "upload-file" command;
+*) conntrack - fixed GRE protocol packet connection-state matching (CVE-2014-8160);
+*) conntrack - significant stability and performance improvements;
+*) crs317 - fixed known multicast flooding to the CPU;
+*) crs3xx - added ethernet tx-drop counter;
+*) crs3xx - correctly display auto-negotiation information for SFP/SFP+ interfaces in 1Gbps rate;
+*) crs3xx - fixed auto negotiation when 2-pair twisted cable is used (downshift feature);
+*) crs3xx - fixed "tx-drop" counter;
+*) crs3xx - improved switch-chip resource allocation on CRS326, CRS328, CRS305;
+*) defconf - added "custom-script" field that prints custom configuration installed by Netinstall;
+*) defconf - automatically set "installation" parameter for outdoor devices;
+*) defconf - changed default configuration type to AP for cAP series devices;
+*) defconf - fixed channel width selection for RU locked devices;
+*) dhcp - create dual stack queue based on limitations specified on DHCPv4 server lease configuration;
+*) dhcp - do not require lease and binding to have the same configuration for dual-stack queues;
+*) dhcp - show warning in log if lease and binding dual-stack related parameters do not match and create separate queues;
+*) dhcpv4-server - added "client-mac-limit" parameter;
+*) dhcpv4-server - added IP conflict logging;
+*) dhcpv4-server - added RADIUS accounting support with queue based statistics;
+*) dhcpv4-server - added "vendor-class-id" matcher (CLI only);
+*) dhcpv4-server - improved stability when performing "check-status" command;
+*) dhcpv4-server - replaced "busy" lease status with "conflict" and "declined";
+*) dhcpv6-client - added option to disable rapid-commit;
+*) dhcpv6-client - fixed status update when leaving "bound" state;
+*) dhcpv6-server - added additional RADIUS parameters for Prefix delegation, "rate-limit" and "life-time";
+*) dhcpv6-server - added "address-list" support for bindings;
+*) dhcpv6-server - added "insert-queue-before" and "parent-queue" parameters;
+*) dhcpv6-server - added RADIUS accounting support with queue based statistics;
+*) dhcpv6-server - added "route-distance" parameter;
+*) dhcpv6-server - fixed dynamic IPv6 binding without proper reference to the server;
+*) dhcpv6-server - override prefix pool and/or DNS server settings by values received from RADIUS;
+*) discovery - correctly create neighbors from VLAN tagged discovery messages;
+*) discovery - fixed CDP packets not including address on slave ports (introduced in v6.44);
+*) discovery - improved neighbour's MAC address detection;
+*) discovery - limit max neighbour count per interface based on total RAM memory;
+*) discovery - show neighbors on actual mesh ports;
+*) e-mail - include "message-id" identification field in e-mail header;
+*) e-mail - properly release e-mail sending session if the server's domain name can not be resolved;
+*) ethernet - added support for 25Gbps and 40Gbps rates;
+*) ethernet - fixed running (R) flag not present on x86 interfaces and CHR legacy adapters;
+*) ethernet - increased loop warning threshold to 5 packets per second;
+*) fetch - added SFTP support;
+*) fetch - improved user policy lookup;
+*) firewall - fixed fragmented packet processing when only RAW firewall is configured;
+*) firewall - process packets by firewall when accepted by RAW with disabled connection tracking;
+*) gps - fixed missing minus close to zero coordinates in dd format;
+*) gps - make sure "direction" parameter is upper case;
+*) gps - strip unnecessary trailing characters from "longtitude" and "latitude" values;
+*) gps - use "serial0" as default port on LtAP mini;
+*) hotspot - added "interface-mac" variable to HTML pages;
+*) hotspot - moved "title" HTML tag after "meta" tags;
+*) ike1 - adjusted debug packet logging topics;
+*) ike2 - added support for ECDSA certificate authentication (rfc4754);
+*) ike2 - added support for IKE SA rekeying for initiator;
+*) ike2 - do not send "User-Name" attribute to RADIUS server if not provided;
+*) ike2 - improved certificate verification when multiple CA certificates received from responder;
+*) ike2 - improved child SA rekeying process;
+*) ike2 - improved XAuth identity conversion on upgrade;
+*) ike2 - prefer SAN instead of DN from certificate for ID payload;
+*) ippool - improved logging for IPv6 Pool when prefix is already in use;
+*) ipsec - added dynamic comment field for "active-peers" menu inherited from identity;
+*) ipsec - added "ph2-total" counter to "active-peers" menu;
+*) ipsec - added support for RADIUS accounting for "eap-radius" and "pre-shared-key-xauth" authentication methods;
+*) ipsec - added traffic statistics to "active-peers" menu;
+*) ipsec - disallow setting "src-address" and "dst-address" for transport mode policies;
+*) ipsec - do not allow adding identity to a dynamic peer;
+*) ipsec - fixed policies becoming invalid after changing priority;
+*) ipsec - general improvements in policy handling;
+*) ipsec - properly drop already established tunnel when address change detected;
+*) ipsec - renamed "remote-peers" to "active-peers";
+*) ipsec - renamed "rsa-signature" authentication method to "digital-signature";
+*) ipsec - replaced policy SA address parameters with peer setting;
+*) ipsec - use tunnel name for dynamic IPsec peer name;
+*) ipv6 - improved system stability when receiving bogus packets;
+*) ltap - renamed SIM slots "up" and "down" to "2" and "3";
+*) lte - added initial support for Vodafone R216-Z;
+*) lte - added passthrough interface subnet selection;
+*) lte - added support for manual operator selection;
+*) lte - allow setting empty APN;
+*) lte - allow to specify URL for firmware upgrade "firmware-file" parameter;
+*) lte - do not show error message for info commands that are not supported;
+*) lte - fixed session reactivation on R11e-LTE in UMTS mode;
+*) lte - improved firmware upgrade process;
+*) lte - improved "info" command query;
+*) lte - improved R11e-4G modem operation;
+*) lte - renamed firmware upgrade "path" command to "firmware-file" (CLI only);
+*) lte - show alphanumeric value for operator info;
+*) lte - show correct firmware revision after firmware upgrade;
+*) lte - use default APN name "internet" when not provided;
+*) lte - use secondary DNS for DNS server configuration;
+*) m33g - added support for additional Serial Console port on GPIO headers;
+*) ospf - added support for link scope opaque LSAs (Type 9) for OSPFv2;
+*) ospf - fixed opaque LSA type checking in OSPFv2;
+*) ospf - improved "unknown" LSA handling in OSPFv3;
+*) ovpn - added "verify-server-certificate" parameter for OVPN client (CVE-2018-10066);
+*) ppp - added initial support for Quectel BG96;
+*) proxy - increased minimal free RAM that can not be used for proxy services;
+*) rb3011 - improved system stability when receiving bogus packets;
+*) rb4011 - fixed MAC address duplication between sfp-sfpplus1 and wlan1 interfaces (wlan1 configuration reset required);
+*) rb921 - improved system stability ("/system routerboard upgrade" required);
+*) routerboard - renamed 'sim' menu to 'modem';
+*) sfp - fixed S-35LC20D transceiver DDMI readouts after reboot;
+*) sms - added USSD message functionality under "/tool sms" (CLI only);
+*) sms - allow specifying multiple "allowed-number" values;
+*) sms - improved delivery report logging;
+*) snmp - added "dot1dStpPortTable" OID;
+*) snmp - added OID for neighbor "interface";
+*) snmp - added "write-access" column to community print;
+*) snmp - allow setting interface "adminStatus";
+*) snmp - fixed "send-trap" not working when "trap-generators" does not contain "temp-exception";
+*) snmp - fixed "send-trap" with multiple "trap-targets";
+*) snmp - improved reliability on SNMP service packet validation;
+*) snmp - properly return multicast and broadcast packet counters for IF-MIB OIDs;
+*) ssh - accept remote forwarding requests with empty hostnames;
+*) ssh - added new "ssh-exec" command for non-interactive command execution;
+*) ssh - fixed non-interactive multiple command execution;
+*) ssh - improved remote forwarding handling (introduced in v6.44.3);
+*) ssh - improved session rekeying process on exchanged data size threshold;
+*) ssh - keep host keys when resetting configuration with "keep-users=yes";
+*) ssh - use correct user when "output-to-file" parameter is used;
+*) sstp - improved stability when received traffic hits tarpit firewall;
+*) supout - added IPv6 ND section to supout file;
+*) supout - added "kid-control devices" section to supout file;
+*) supout - added "pwr-line" section to supout file;
+*) supout - changed IPv6 pool section to output detailed print;
+*) switch - properly reapply settings after switch chip reset;
+*) tftp - added "max-block-size" parameter under TFTP "settings" menu (CLI only);
+*) tile - improved link fault detection on SFP+ ports;
+*) tr069-client - added LTE CQI and IMSI parameter support;
+*) tr069-client - fixed potential memory corruption;
+*) tr069-client - improved error reporting with incorrect firware upgrade XML file;
+*) traceroute - improved stability when sending large ping amounts;
+*) traffic-generator - improved stability when stopping traffic generator;
+*) tunnel - removed "local-address" requirement when "ipsec-secret" is used;
+*) userman - added support for "Delegated-IPv6-Pool" and "DNS-Server-IPv6-Address" (CLI only);
+*) w60g - do not show unused "dmg" parameter;
+*) w60g - prefer AP with strongest signal when multiple APs with same SSID present;
+*) w60g - show running frequency under "monitor" command;
+*) winbox - added "System/SwOS" menu for all dual-boot devices;
+*) winbox - do not allow setting "dns-lookup-interval" to "0";
+*) winbox - show "LCD" menu only on boards that have LCD screen;
+*) wireless - fixed frequency duplication in the frequency selection menu;
+*) wireless - fixed incorrect IP header for RADIUS accounting packet;
+*) wireless - improved 160MHz channel width stability on rb4011;
+*) wireless - improved DFS radar detection when using non-ETSI regulated country;
+*) wireless - improved installation mode selection for wireless outdoor equipment;
+*) wireless - set default SSID and supplicant-identity the same as router's identity;
+*) wireless - updated "china" regulatory domain information;
+*) wireless - updated "new zealand" regulatory domain information;
+*) www - improved client-initiated renegotiation within the SSL and TLS protocols (CVE-2011-1473);
+
+What's new in 6.45 (2019-Jun-21 09:00):
+
+(factory only release)
+
+What's new in 6.44.4 (2019-May-09 12:14):
+
+(factory only release)
+
 What's new in 6.44.3 (2019-Apr-23 12:37):
 
 *) certificate - fixed SAN being duplicated on status change (introduced in v6.44);
