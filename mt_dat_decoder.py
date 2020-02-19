@@ -16,8 +16,9 @@ class MTConfig(object):
 		self.mapping = {0xfe0009 : 'comment',
 						0xfe0001: 'record_id',
 						0xfe000a: 'disabled',
+						0xfe000d: 'default',
 						0xffffff: 'index_id',
-						0xfe0008: 'invalid',
+						0xfe0008: 'active',
 						0xfe0010: 'name',
 						}
 		self.decode = False
